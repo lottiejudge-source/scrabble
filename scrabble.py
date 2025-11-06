@@ -20,35 +20,66 @@ class ScrabbleConvertorTest(unittest.TestCase):
         self.assertEqual(letter_to_point_convertor('Z**ebra'), 36)
 
     def test_result_of_double_word_square(self):
-        self.assertEqual(letter_to_point_convertor('Hall', ))
+        self.assertEqual(letter_to_point_convertor("hall(d)"), 14)
+
+    def test_result_of_double_word_square_and_triple_letter_square(self):
+        self.assertEqual(letter_to_point_convertor("h**all(d)"),30 )
+   
+    def test_result_of_triple_word_square(self):
+        self.assertEqual(letter_to_point_convertor("hall(t)"), 21)
+
+    def test_result_of_blank_tile(self):
+        self.assertEqual(letter_to_point_convertor("hell^"), 5)
+    
+    def test_result_of_seven_letter_word(self):
+        self.assertEqual(letter_to_point_convertor("Palaces"), 61)
+    
 
 
-def letter_to_point_convertor(word):
-    scrabble_points_dictionary = {
-        'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 'G': 2, 'H': 4, 'I': 1, 'J': 8, 'K': 5, 'L': 1, 'M': 3, 'N': 4, 'O': 1, 
+scrabble_points_dictionary = {
+        'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 'G': 2, 'H': 4, 'I': 1, 'J': 8, 'K': 5, 'L': 1, 'M': 3, 'N': 1, 'O': 1, 
         'P': 3, 'Q': 10, 'R': 1, 'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4,
-        'X': 8, 'Y': 4, 'Z': 10
+        'X': 8, 'Y': 4, 'Z': 10, " ": 0
     }
+        
+def letter_to_point_convertor(word):
     word = word.upper()
     result = 0
     
+    bonus_fifty = ''.join([char for char in word if char.isalnum()])
+    if len(bonus_fifty) > 6:
+        result += 50
+
     for i, letter in enumerate(word):
-        if letter == '*' and word[i+1] != '*':
+        if letter == '^':
+            word = word.replace(word[i-1], " ")
+            word = word.replace('^', "")
+ 
+        elif letter == '*' and word[i+1] != '*':
             replacement_letter = word[i-1]
             word = word.replace('*', replacement_letter )
         elif letter =='*' and word[i+1] == '*':
             replacement_letter = word[i-1]
             word = word.replace('*', replacement_letter  )
-            print(word)
+   
 
+    if '(D)' in word:    
+        word = word * 2
+        word = word.replace('(D)', '')
+    elif '(T)' in word:
+        word = word * 3
+        word = word.replace('(T)', '')
 
     for letter in word:
         result += scrabble_points_dictionary[letter]
         
     
-
+    
     
     return result
+
+
+         
 
 
 if __name__ == '__main__':
