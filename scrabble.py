@@ -19,8 +19,8 @@ class ScrabbleConvertorTest(unittest.TestCase):
         self.assertEqual(letter_to_point_convertor('De**sk'), 11)
         self.assertEqual(letter_to_point_convertor('Z**ebra'), 36)
 
-    # def test_result_of_double_word_square(self):
-    #     self.assertEqual(letter_to_point_convertor("hall(d)"), 14)
+    def test_result_of_double_word_square(self):
+        self.assertEqual(letter_to_point_convertor("hall(d)"), 14)
 
     # def test_result_of_double_word_square_and_triple_letter_square(self):
     #     self.assertEqual(letter_to_point_convertor("h**all(d)"),30 )
@@ -68,6 +68,11 @@ def letter_to_point_convertor(word):
             result -= scrabble_points_dictionary[word[i-1]]
             print(result)
             i += 1 
+            continue
+        
+        if letter == '(' and word[i+2] == ')':
+            result *= 2
+            i += 3
             continue
 
         if letter.isalnum():
