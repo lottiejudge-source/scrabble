@@ -84,22 +84,7 @@ def letter_to_point_convertor(word):
         if letter.isalnum():
             result += scrabble_points_dictionary[letter]
         i += 1
-    
-
-
-    # if '(D)' in word:    
-    #     word = word * 2
-    #     word = word.replace('(D)', '')
-    # elif '(T)' in word:
-    #     word = word * 3
-    #     word = word.replace('(T)', '')
-
-    # for letter in word:
-    #     result += 
-        
-    
-    
-    
+     
     return result
 
 
