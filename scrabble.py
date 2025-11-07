@@ -28,8 +28,8 @@ class ScrabbleConvertorTest(unittest.TestCase):
     # def test_result_of_triple_word_square(self):
     #     self.assertEqual(letter_to_point_convertor("hall(t)"), 21)
 
-    # def test_result_of_blank_tile(self):
-    #     self.assertEqual(letter_to_point_convertor("hell^"), 5)
+    def test_result_of_blank_tile(self):
+        self.assertEqual(letter_to_point_convertor("hell^"), 6)
     
     def test_result_of_seven_letter_word(self):
         self.assertEqual(letter_to_point_convertor("Palaces"), 61)
@@ -62,22 +62,19 @@ def letter_to_point_convertor(word):
             result += scrabble_points_dictionary[word[i-1]]
             i += 1
             continue 
+        
+        if letter == '^':
+            print(result)
+            result -= scrabble_points_dictionary[word[i-1]]
+            print(result)
+            i += 1 
+            continue
 
         if letter.isalnum():
             result += scrabble_points_dictionary[letter]
         i += 1
 
 
-    #         word = word.replace(word[i-1], " ")
-    #         word = word.replace('^', "")
- 
-    #     elif letter == '*' and word[i+1] != '*':
-    #         replacement_letter = word[i-1]
-    #         word = word.replace('*', replacement_letter )
-    #     elif letter =='*' and word[i+1] == '*':
-    #         replacement_letter = word[i-1]
-    #         word = word.replace('*', replacement_letter  )
-   
 
     # if '(D)' in word:    
     #     word = word * 2
