@@ -73,7 +73,7 @@ def letter_to_point_convertor(word):
         if letter.isalnum():
             result += scrabble_points_dictionary[letter]
         i += 1
-
+    
 
 
     # if '(D)' in word:    
