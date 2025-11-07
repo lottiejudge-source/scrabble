@@ -22,11 +22,11 @@ class ScrabbleConvertorTest(unittest.TestCase):
     def test_result_of_double_word_square(self):
         self.assertEqual(letter_to_point_convertor("hall(d)"), 14)
 
-    # def test_result_of_double_word_square_and_triple_letter_square(self):
-    #     self.assertEqual(letter_to_point_convertor("h**all(d)"),30 )
+    def test_result_of_double_word_square_and_triple_letter_square(self):
+        self.assertEqual(letter_to_point_convertor("h**all(d)"),30 )
    
-    # def test_result_of_triple_word_square(self):
-    #     self.assertEqual(letter_to_point_convertor("hall(t)"), 21)
+    def test_result_of_triple_word_square(self):
+        self.assertEqual(letter_to_point_convertor("hall(t)"), 21)
 
     def test_result_of_blank_tile(self):
         self.assertEqual(letter_to_point_convertor("hell^"), 6)
@@ -70,8 +70,14 @@ def letter_to_point_convertor(word):
             i += 1 
             continue
         
-        if letter == '(' and word[i+2] == ')':
+        if letter == '(' and word[i+1] == 'D' and word[i+2] == ')':
+
             result *= 2
+            i += 3
+            continue
+        
+        if letter == '(' and word[i+1] == 'T' and word[i+2] == ')':
+            result *= 3
             i += 3
             continue
 
