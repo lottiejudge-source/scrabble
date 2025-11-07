@@ -19,14 +19,14 @@ class ScrabbleConvertorTest(unittest.TestCase):
         self.assertEqual(letter_to_point_convertor('De**sk'), 11)
         self.assertEqual(letter_to_point_convertor('Z**ebra'), 36)
 
-    # def test_result_of_double_word_square(self):
-    #     self.assertEqual(letter_to_point_convertor("hall(d)"), 14)
+    def test_result_of_double_word_square(self):
+        self.assertEqual(letter_to_point_convertor("hall(d)"), 14)
 
-    # def test_result_of_double_word_square_and_triple_letter_square(self):
-    #     self.assertEqual(letter_to_point_convertor("h**all(d)"),30 )
+    def test_result_of_double_word_square_and_triple_letter_square(self):
+        self.assertEqual(letter_to_point_convertor("h**all(d)"),30 )
    
-    # def test_result_of_triple_word_square(self):
-    #     self.assertEqual(letter_to_point_convertor("hall(t)"), 21)
+    def test_result_of_triple_word_square(self):
+        self.assertEqual(letter_to_point_convertor("hall(t)"), 21)
 
     def test_result_of_blank_tile(self):
         self.assertEqual(letter_to_point_convertor("hell^"), 6)
@@ -69,26 +69,22 @@ def letter_to_point_convertor(word):
             print(result)
             i += 1 
             continue
+        
+        if letter == '(' and word[i+1] == 'D' and word[i+2] == ')':
+
+            result *= 2
+            i += 3
+            continue
+        
+        if letter == '(' and word[i+1] == 'T' and word[i+2] == ')':
+            result *= 3
+            i += 3
+            continue
 
         if letter.isalnum():
             result += scrabble_points_dictionary[letter]
         i += 1
-    
-
-
-    # if '(D)' in word:    
-    #     word = word * 2
-    #     word = word.replace('(D)', '')
-    # elif '(T)' in word:
-    #     word = word * 3
-    #     word = word.replace('(T)', '')
-
-    # for letter in word:
-    #     result += 
-        
-    
-    
-    
+     
     return result
 
 
